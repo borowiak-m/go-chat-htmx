@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <script 
+            src="https://unpkg.com/htmx.org@2.0.1" 
+            integrity="sha384-QWGpdj554B4ETpJJC9z+ZHJcA/i59TyjxEPXiiUgN2WmTyV5OEZWCD6gQhgkdpB/" 
+            crossorigin="anonymous">
+        </script>
+        <script src="https://unpkg.com/htmx.org@2.0.1/dist/ext/ws.js"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <title>Realtime chat</title>
+    </head>
+    <body>
+        <h1 class="text-3xl text-center p-4"></h1>
+        <div hx-ext="ws" ws-connect="/ws">
+            <div class="flex gb-grey-100 p-4">
+                <ul id="chat_room" hx-swap="beforehand" hx-swap-oob="beforehand"></ul>
+            </div>
+            <form id="form" ws-send>
+                <input name="text" type="text" class="border-2 border-gray-300 p-2" placeholder="Type your message">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2">Send</button>
+            </form>
+        </div>        
+    </body>
+</html>
