@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 	"net/http"
+
+	"github.com/borowiak-m/go-chat-htmx/types"
 )
 
 func serveIndex(w http.ResponseWriter, req *http.Request) {
@@ -19,11 +21,11 @@ func serveIndex(w http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
-	hub := NewHub()
+	hub := types.NewHub()
 	go hub.Run()
 	http.HandleFunc("/", serveIndex)
 	http.HandleFunc("/ws", func(w http.ResponseWriter, req *http.Request) {
-		ServeWs(hub, w, req)
+		types.ServeWs(hub, w, req)
 	})
 
 	log.Fatal(http.ListenAndServe(":3000", nil))
